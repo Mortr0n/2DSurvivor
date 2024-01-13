@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cnovu6r0bceev"]
+
+[node name="BasicEnemy" type="CharacterBody2D"]
