@@ -22,14 +22,14 @@ func on_level_up(current_level: int):
 
 
 func apply_upgrade(upgrade: AbilityUpgrade):
-	var has_upgrade = current_upgrades.has(upgrade)
+	var has_upgrade = current_upgrades.has(upgrade.id)
 	if !has_upgrade:
-		current_upgrades[upgrade] = {
+		current_upgrades[upgrade.id] = {
 			"resource": upgrade,
 			"quantity": 1
 		}
 	else:
-		current_upgrades[upgrade]["quantity"] += 1
+		current_upgrades[upgrade.id]["quantity"] += 1
 	#print(current_upgrades)
 	GameEvents.emit_ability_upgrade_added(upgrade, current_upgrades)
 	

@@ -9,4 +9,6 @@ func emit_experience_vial_collected(number: float):
 
 
 func emit_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
+	#print(current_upgrades)
+	#print(upgrade)
 	ability_upgrade_added.emit(upgrade, current_upgrades)

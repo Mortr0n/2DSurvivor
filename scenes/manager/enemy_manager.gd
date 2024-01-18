@@ -3,6 +3,7 @@ extends Node
 const SPAWN_RADIUS = 375
 
 @export var basic_enemy_scene: PackedScene
+#@onready var entities_layer: CanvasGroup = entities
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,5 +19,10 @@ func on_timer_timeout():
 	var spawn_position = player.global_position + (random_direction * SPAWN_RADIUS)
 	
 	var enemy = basic_enemy_scene.instantiate() as Node2D
-	get_parent().add_child(enemy)
+	
+	
+	var entities_layer = get_tree().get_first_node_in_group("entities_layer")
+#	could look if the layer exists in case of the layer not being there for some reason
+	entities_layer.add_child(enemy)
+	#get_parent().add_child(enemy)
 	enemy.global_position = spawn_position

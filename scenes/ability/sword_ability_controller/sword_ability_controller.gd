@@ -35,7 +35,9 @@ func on_timer_timeout():
 	)
 	
 	var sword_instance = sword_ability.instantiate() as SwordAbility
-	player.get_parent().add_child(sword_instance)
+	var foreground_layer = get_tree().get_first_node_in_group("foreground_layer")
+	foreground_layer.add_child(sword_instance)
+	#player.get_parent().add_child(sword_instance)  original way of adding the sword to the scene tree.  Now we add to the foreground always from our foreground node
 	sword_instance.hitbox_component.damage = damage
 	
 	sword_instance.global_position = enemies[0].global_position
@@ -46,10 +48,11 @@ func on_timer_timeout():
 	
 	
 func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
+	#print("ID: " + upgrade.id + "Name: " + upgrade.name + "Desc: " + upgrade.description)
 	if upgrade.id != "sword_rate":
 		return
 		
-	var percent_reduction = current_upgrades["sword_rate"]["quantity"] * .9
+	var percent_reduction = current_upgrades["sword_rate"]["quantity"] * .1
 	$Timer.wait_time = base_wait_time * (1 - percent_reduction)
 	$Timer.start()
 	

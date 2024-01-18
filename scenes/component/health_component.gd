@@ -3,7 +3,7 @@ class_name HealthComponent
 
 signal died
 
-@export var max_health: float = 10
+@export var max_health: float = 5
 var current_health
 
 
