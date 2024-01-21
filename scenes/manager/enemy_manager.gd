@@ -18,7 +18,8 @@ func _ready():
 	arena_time_manager.arena_difficulty_increased.connect(on_arena_difficulty_increased)
 
 
-func get_spawn_position(timesRun: int): # when I take over look to pass in the player: CharacterBody2D Not sure I want to look for it twice.
+#func get_spawn_position(timesRun: int): # when I take over look to pass in the player: CharacterBody2D Not sure I want to look for it twice.
+func get_spawn_position():
 	var player = get_tree().get_first_node_in_group("player")
 	if player == null:
 		return Vector2.ZERO
@@ -27,8 +28,7 @@ func get_spawn_position(timesRun: int): # when I take over look to pass in the p
 	var random_direction = Vector2.RIGHT.rotated(randf_range(0, TAU))
 	for i in 4:
 		spawn_position = player.global_position + (random_direction * SPAWN_RADIUS)
-		
-	# we are checking if there would be a wall collision between the enemy and the player using ray tracing.
+		# we are checking if there would be a wall collision between the enemy and the player using ray tracing.
 		var query_parameters = PhysicsRayQueryParameters2D.create(player.global_position, spawn_position, 1 << 0)
 		var collision_result = get_tree().root.world_2d.direct_space_state.intersect_ray(query_parameters)
 		
@@ -36,9 +36,8 @@ func get_spawn_position(timesRun: int): # when I take over look to pass in the p
 			return spawn_position
 		else:
 			random_direction = random_direction.rotated(1.5708) # It's in radians.  I just converted 90 deg, but there is a deg_to_rad, but is it worth the extra calc???
-	
-	if timesRun < 4:
-		return get_spawn_position(timesRun + 1)
+	#if timesRun < 4:
+		#return get_spawn_position(timesRun + 1)
 	return Vector2.ZERO
 
 
@@ -55,7 +54,7 @@ func on_timer_timeout():
 #	could look if the layer exists in case of the layer not being there for some reason
 	entities_layer.add_child(enemy)
 	#get_parent().add_child(enemy)
-	enemy.global_position = get_spawn_position(0)
+	enemy.global_position = get_spawn_position()
 
 func on_arena_difficulty_increased(arena_difficulty_level: int):
 	var max_time_off = .5
