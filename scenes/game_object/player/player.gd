@@ -38,11 +38,9 @@ func _process(delta):
 	else:
 		animation_player.play("RESET")
 	
-	var move_sign = sign(movement_vector.x) # animation directions 
-	if move_sign == 0:
-		visuals.scale = Vector2.ONE
-	else:
-		visuals.scale = Vector2(move_sign, 1)
+	var move_sign = sign(movement_vector.x) # animation directions returns the .x which will be a -1 for left, 1 for right or 0 for not moving
+	if move_sign != 0:
+		visuals.scale = Vector2(move_sign, 1) #setting x cordinate of the scale of the visual to match the direction of movement
 	
 
 

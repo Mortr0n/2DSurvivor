@@ -1,6 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0xuif18tiain"]
+[gd_scene load_steps=9 format=3 uid="uid://c0xuif18tiain"]
 
 [ext_resource type="Texture2D" uid="uid://bgjbfdtnh5f6h" path="res://scenes/game_object/basic_enemy/basic_enemy.png" id="1_8mnts"]
+[ext_resource type="Script" path="res://scenes/component/death_component.gd" id="1_x3j12"]
+
+[sub_resource type="Animation" id="Animation_mvf8e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_ghw55"]
 resource_name = "default"
@@ -31,21 +47,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_mvf8e"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles2D:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7cr38"]
 _data = {
 "RESET": SubResource("Animation_mvf8e"),
@@ -64,29 +65,29 @@ particle_flag_disable_z = true
 direction = Vector3(0, -180, 0)
 spread = 30.35
 flatness = 0.078
-initial_velocity_min = 100.0
+initial_velocity_min = 175.0
 initial_velocity_max = 250.0
-angular_velocity_min = 100.0
-angular_velocity_max = 200.0
-gravity = Vector3(0, 450, 0)
+angular_velocity_min = -1440.0
+angular_velocity_max = 700.0
+gravity = Vector3(0, 800, 0)
 linear_accel_min = -14.9
 linear_accel_max = 100.0
 scale_curve = SubResource("CurveTexture_rqjwp")
 
 [node name="DeathComponent" type="Node2D"]
+script = ExtResource("1_x3j12")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_7cr38")
 }
-autoplay = "default"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_p3ifb")
 texture = ExtResource("1_8mnts")
-lifetime = 0.75
+lifetime = 0.5
 one_shot = true
 fixed_fps = 0
 interpolate = false
