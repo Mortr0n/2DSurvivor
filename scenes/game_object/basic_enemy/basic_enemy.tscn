@@ -79,6 +79,12 @@ max_speed = 50
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/Sprite2D")
 
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("2_cckte")
+offset = Vector2(0, -4)
+
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_rakln")]
 health_component = NodePath("../HealthComponent")
 
@@ -86,12 +92,6 @@ health_component = NodePath("../HealthComponent")
 visible = false
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_5hnrv")
-
-[node name="Visuals" type="Node2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
-texture = ExtResource("2_cckte")
-offset = Vector2(0, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
