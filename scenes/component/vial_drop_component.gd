@@ -11,7 +11,7 @@ func _ready():
 func on_died():
 	#var test = randf()
 	#print(test > drop_percent)
-	if randf() < drop_percent:
+	if randf() > drop_percent:
 		return
 	
 	if vial_scene == null:
