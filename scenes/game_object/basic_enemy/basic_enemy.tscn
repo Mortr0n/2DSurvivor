@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cnovu6r0bceev"]
+[gd_scene load_steps=16 format=3 uid="uid://cnovu6r0bceev"]
 
 [ext_resource type="Script" path="res://scenes/game_object/basic_enemy/basic_enemy.gd" id="1_lqf8e"]
 [ext_resource type="Texture2D" uid="uid://bgjbfdtnh5f6h" path="res://scenes/game_object/basic_enemy/basic_enemy.png" id="2_cckte"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://c0xuif18tiain" path="res://scenes/component/death_component.tscn" id="4_3pgts"]
 [ext_resource type="PackedScene" uid="uid://ekiev2a1wa0y" path="res://scenes/component/velocity_component.tscn" id="4_4dpiw"]
 [ext_resource type="PackedScene" uid="uid://d2wuia6j5jgwn" path="res://scenes/component/hurtbox_component.tscn" id="4_rakln"]
+[ext_resource type="Shader" path="res://scenes/component/hit_flash_component.gdshader" id="6_rommj"]
+[ext_resource type="PackedScene" uid="uid://4saen1wuwpof" path="res://scenes/component/hit_flash_component.tscn" id="8_p8g8u"]
 
 [sub_resource type="Animation" id="Animation_1f3rr"]
 length = 0.001
@@ -46,6 +48,11 @@ _data = {
 "walk": SubResource("Animation_ij2er")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fjsed"]
+resource_local_to_scene = true
+shader = ExtResource("6_rommj")
+shader_parameter/lerp_percent = 0.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_5hnrv"]
 radius = 11.0
 
@@ -74,6 +81,11 @@ health_component = NodePath("../HealthComponent")
 [node name="VelocityComponent" parent="." instance=ExtResource("4_4dpiw")]
 unique_name_in_owner = true
 max_speed = 50
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("8_p8g8u")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/Sprite2D")
+hit_flash_material = SubResource("ShaderMaterial_fjsed")
 
 [node name="DeathComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("4_3pgts")]
 health_component = NodePath("../HealthComponent")

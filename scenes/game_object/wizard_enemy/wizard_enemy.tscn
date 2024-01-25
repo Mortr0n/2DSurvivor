@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d4g04172hkn6n"]
+[gd_scene load_steps=16 format=3 uid="uid://d4g04172hkn6n"]
 
 [ext_resource type="Script" path="res://scenes/game_object/wizard_enemy/wizard_enemy.gd" id="1_dwaj1"]
 [ext_resource type="PackedScene" uid="uid://ddqhnkqajlwbi" path="res://scenes/component/health_component.tscn" id="1_tp41e"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bhtiddptigi6p" path="res://scenes/game_object/wizard_enemy/wizard_enemy.png" id="3_yihd3"]
 [ext_resource type="PackedScene" uid="uid://ekiev2a1wa0y" path="res://scenes/component/velocity_component.tscn" id="4_bm8rx"]
 [ext_resource type="PackedScene" uid="uid://d2wuia6j5jgwn" path="res://scenes/component/hurtbox_component.tscn" id="5_hpcci"]
+[ext_resource type="PackedScene" uid="uid://4saen1wuwpof" path="res://scenes/component/hit_flash_component.tscn" id="5_l00l3"]
+[ext_resource type="Shader" path="res://scenes/component/hit_flash_component.gdshader" id="6_417sd"]
 
 [sub_resource type="Animation" id="Animation_h3mh7"]
 length = 0.001
@@ -63,6 +65,11 @@ _data = {
 "walk": SubResource("Animation_vmv0q")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0j8b"]
+resource_local_to_scene = true
+shader = ExtResource("6_417sd")
+shader_parameter/lerp_percent = 0.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yu7uv"]
 radius = 6.0
 height = 14.0
@@ -92,6 +99,11 @@ health_component = NodePath("../HealthComponent")
 [node name="VelocityComponent" parent="." instance=ExtResource("4_bm8rx")]
 unique_name_in_owner = true
 max_speed = 50
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_l00l3")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/Sprite2D")
+hit_flash_material = SubResource("ShaderMaterial_i0j8b")
 
 [node name="DeathComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("2_hctqb")]
 health_component = NodePath("../HealthComponent")
