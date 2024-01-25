@@ -4,8 +4,10 @@ const MAX_RANGE = 150
 
 @export var sword_ability: PackedScene
 
-var damage = 5
+var base_damage = 5
+var additional_damage_percent = 1
 var base_wait_time
+var damage_power = 1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -38,7 +40,7 @@ func on_timer_timeout():
 	var foreground_layer = get_tree().get_first_node_in_group("foreground_layer")
 	foreground_layer.add_child(sword_instance)
 	#player.get_parent().add_child(sword_instance)  original way of adding the sword to the scene tree.  Now we add to the foreground always from our foreground node
-	sword_instance.hitbox_component.damage = damage
+	sword_instance.hitbox_component.damage = base_damage * pow(additional_damage_percent, damage_power)
 	
 	sword_instance.global_position = enemies[0].global_position
 	sword_instance.global_position += Vector2.RIGHT.rotated(randf_range(0, TAU)) * 4
@@ -49,13 +51,14 @@ func on_timer_timeout():
 	
 func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
 	#print("ID: " + upgrade.id + "Name: " + upgrade.name + "Desc: " + upgrade.description)
-	if upgrade.id != "sword_rate":
-		return
+	if upgrade.id == "sword_rate":
+		var percent_reduction = current_upgrades["sword_rate"]["quantity"] * .1
+		$Timer.wait_time = base_wait_time * (1 - percent_reduction)
+		$Timer.start()
+	elif upgrade.id == "sword_damage":
+		damage_power = current_upgrades["sword_damage"]["quantity"] 
+		additional_damage_percent = 1.15
 		
-	var percent_reduction = current_upgrades["sword_rate"]["quantity"] * .1
-	$Timer.wait_time = base_wait_time * (1 - percent_reduction)
-	$Timer.start()
-	
 	#print($Timer.wait_time)
 	
 	
