@@ -7,6 +7,9 @@ const MAX_SPEED = 40
 @onready var velocity_component = %VelocityComponent
 
 
+func _ready():
+	$HurtboxComponent.hit.connect(on_hit)
+
 func _process(delta):
 	velocity_component.accelerate_to_player()
 	velocity_component.move(self)
@@ -26,7 +29,9 @@ func get_direction_to_player():
 		return (player_node.global_position - global_position).normalized()
 	return Vector2.ZERO
 
-
+func on_hit():
+	$HitRandomAudioPlayerComponent.play_random()
+	#$AudioStreamPlayer2D.play()
 # Damage was originally called from the enemy, but now we've updated so that a Hitbox/Hurtbox collision causes damage
 # Leaving the original 2 functions that we're handling the damage in from the enemy 
 #func _ready():

@@ -48,7 +48,7 @@ func on_area_entered(other_area: Area2D):
 	tween.chain()  # since we're running the tweens in parallel we need a way to wait for them to finish before calling the callback to collect and remove the vial from the queue
 	tween.tween_callback(collect)
 	
-	
+	$RandomStreamPlayer2DComponent.play_random()
 	
 
 

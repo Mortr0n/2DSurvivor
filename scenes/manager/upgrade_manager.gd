@@ -11,21 +11,23 @@ var upgrade_axe = preload("res://resources/upgrades/axe.tres")
 var upgrade_axe_damage = preload("res://resources/upgrades/axe_damage.tres")
 var upgrade_sword_damage = preload("res://resources/upgrades/sword_damage.tres")
 var upgrade_sword_rate = preload("res://resources/upgrades/sword_rate.tres")
+var upgrade_player_speed = preload("res://resources/upgrades/player_speed.tres")
 
 
 func _ready():
 	upgrade_pool.add_item(upgrade_axe, 10)  # keep in mind these weights can be made to balance the game.  Higher weight = greater chance it will be chosen.
 	upgrade_pool.add_item(upgrade_sword_damage, 10)
 	upgrade_pool.add_item(upgrade_sword_rate, 10)
+	upgrade_pool.add_item(upgrade_player_speed, 15)
 	
 	experience_manager.level_up.connect(on_level_up)
 
 
 func apply_upgrade(upgrade: AbilityUpgrade):
-	for i in upgrade_pool.items.size():
-		#var value = upgrade_pool[key]
-		print("Upgrade pool inside apply_upgrade ")
-		print(upgrade_pool.items[i].item) 
+	#for i in upgrade_pool.items.size():
+		##var value = upgrade_pool[key]
+		#print("Upgrade pool inside apply_upgrade ")
+		#print(upgrade_pool.items[i].item) 
 	var has_upgrade = current_upgrades.has(upgrade.id)
 	if !has_upgrade:
 		current_upgrades[upgrade.id] = {

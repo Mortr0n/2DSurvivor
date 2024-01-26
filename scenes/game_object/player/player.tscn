@@ -1,9 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://dgemwwxya6wdf"]
+[gd_scene load_steps=19 format=3 uid="uid://dgemwwxya6wdf"]
 
 [ext_resource type="Texture2D" uid="uid://bitrrtk8ia0k4" path="res://scenes/game_object/player/player.png" id="1_2wmrp"]
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_jpihs"]
 [ext_resource type="PackedScene" uid="uid://ddqhnkqajlwbi" path="res://scenes/component/health_component.tscn" id="2_fitrp"]
+[ext_resource type="PackedScene" uid="uid://ekiev2a1wa0y" path="res://scenes/component/velocity_component.tscn" id="2_h65fl"]
 [ext_resource type="PackedScene" uid="uid://cy7cdsyvujak7" path="res://scenes/ability/sword_ability_controller/sword_ability_controller.tscn" id="2_n4uuq"]
+[ext_resource type="PackedScene" uid="uid://cgjb0gw8y4dv5" path="res://scenes/component/random_stream_player_2d_component.tscn" id="6_dgkus"]
+[ext_resource type="AudioStream" uid="uid://biobs1gt1ulmq" path="res://assets/audio/player_hit/impactMetal_heavy_000.ogg" id="7_kplhq"]
+[ext_resource type="AudioStream" uid="uid://cxoo3410if8fa" path="res://assets/audio/player_hit/impactMetal_heavy_001.ogg" id="8_ro8jk"]
+[ext_resource type="AudioStream" uid="uid://d3hr6dicmu84c" path="res://assets/audio/player_hit/impactMetal_heavy_002.ogg" id="9_3wm1s"]
+[ext_resource type="AudioStream" uid="uid://byvxaaemejavg" path="res://assets/audio/player_hit/impactMetal_heavy_003.ogg" id="10_oa7mg"]
+[ext_resource type="AudioStream" uid="uid://rk2yb765r2mc" path="res://assets/audio/player_hit/impactMetal_heavy_004.ogg" id="11_4b65m"]
 
 [sub_resource type="Animation" id="Animation_3loiv"]
 length = 0.001
@@ -120,6 +127,9 @@ libraries = {
 "": SubResource("AnimationLibrary_vt62g")
 }
 
+[node name="VelocityComponent" parent="." instance=ExtResource("2_h65fl")]
+acceleration = 25.0
+
 [node name="HealthComponent" parent="." instance=ExtResource("2_fitrp")]
 max_health = 10.0
 
@@ -174,3 +184,6 @@ shape = SubResource("CapsuleShape2D_xtyw5")
 visible = false
 position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_aisyh")
+
+[node name="HitRandomStreamPlayer" parent="." instance=ExtResource("6_dgkus")]
+streams = Array[AudioStream]([ExtResource("7_kplhq"), ExtResource("8_ro8jk"), ExtResource("9_3wm1s"), ExtResource("10_oa7mg"), ExtResource("11_4b65m")])

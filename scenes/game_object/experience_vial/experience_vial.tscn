@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://wnggnrfadk5g"]
+[gd_scene load_steps=8 format=3 uid="uid://wnggnrfadk5g"]
 
 [ext_resource type="Script" path="res://scenes/game_object/experience_vial/experience_vial.gd" id="1_ibkt4"]
 [ext_resource type="Texture2D" uid="uid://cmlwa207qk34h" path="res://scenes/game_object/experience_vial/experience_vial.png" id="2_52iva"]
+[ext_resource type="PackedScene" uid="uid://cgjb0gw8y4dv5" path="res://scenes/component/random_stream_player_2d_component.tscn" id="2_g21kx"]
+[ext_resource type="AudioStream" uid="uid://brnjair0sx0ev" path="res://assets/audio/experience_pickup/impactMining_002.ogg" id="3_ge2ld"]
+[ext_resource type="AudioStream" uid="uid://bagk7th2culta" path="res://assets/audio/experience_pickup/impactMining_003.ogg" id="4_f5d3k"]
+[ext_resource type="AudioStream" uid="uid://de1mx4wlxfvfd" path="res://assets/audio/experience_pickup/impactMining_004.ogg" id="5_7xpm3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g8bg0"]
 radius = 6.0
@@ -9,6 +13,10 @@ height = 18.0
 
 [node name="ExperienceVial" type="Node2D"]
 script = ExtResource("1_ibkt4")
+
+[node name="RandomStreamPlayer2DComponent" parent="." instance=ExtResource("2_g21kx")]
+streams = Array[AudioStream]([ExtResource("3_ge2ld"), ExtResource("4_f5d3k"), ExtResource("5_7xpm3")])
+min_pitch = 1.5
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

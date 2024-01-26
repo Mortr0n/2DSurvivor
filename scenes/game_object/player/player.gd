@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-const MAX_SPEED = 125
-const ACCELERATION_SMOOTHING = 25
 
 @onready var damage_interval_timer = $DamageIntervalTimer
 @onready var health_component = $HealthComponent
@@ -9,10 +7,14 @@ const ACCELERATION_SMOOTHING = 25
 @onready var ability_manager = $AbilityManager
 @onready var animation_player = $AnimationPlayer
 @onready var visuals = $Visuals
+@onready var velocity_component = $VelocityComponent
+
 
 var number_colliding_bodies = 0
+var base_speed = 0
 
 func _ready():
+	base_speed = velocity_component.max_speed
 #Putting this comment in here, because relying on node names is generally a bad practice. 
 #instead you should use groups or classes. see link for more on this. https://www.reddit.com/r/godot/comments/14std39/nodename_not_returning_the_correct_name_after/ 
 # could check if it's in the enemies group or define an enemy class and look for that. If you're at this point congratulations for getting far enough to do your own thing!  
@@ -29,8 +31,10 @@ func _ready():
 func _process(delta):
 	var movement_vector = get_movement_vector()
 	var direction = movement_vector.normalized()
-	var target_velocity = (direction * MAX_SPEED)
-	velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING))
+	velocity_component.accelerate_in_direction(direction)
+	velocity_component.move(self)
+	#var target_velocity = (direction * MAX_SPEED)
+	#velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING))
 	move_and_slide()
 	
 	if movement_vector.x != 0 || movement_vector.y != 0: # which animation to play
@@ -74,16 +78,19 @@ func on_damage_interval_timer_timeout():
 	check_deal_damage()
 
 func on_health_changed():
+	GameEvents.emit_player_damaged()
 	update_health_display()
-	
+	$HitRandomStreamPlayer.play_random()
 
 func on_ability_upgrade_added(ability_upgrade: AbilityUpgrade, current_upgrades: Dictionary):
-	if not ability_upgrade is Ability:
-		return
-	
-	var ability: Ability = ability_upgrade
-	ability_manager.add_child(ability.ability_controller_scene.instantiate())
-	
+	if ability_upgrade is Ability:
+		var ability: Ability = ability_upgrade
+		ability_manager.add_child(ability.ability_controller_scene.instantiate())
+	elif ability_upgrade.id == "player_speed":
+		var player_speed_quantity = current_upgrades["player_speed"]["quantity"]	
+		#print("PSQ = " + str(player_speed_quantity) + " max speed = " + str(velocity_component.max_speed))
+		velocity_component.max_speed = base_speed + ((velocity_component.max_speed * .10 )* player_speed_quantity)
+		#print(velocity_component.max_speed)
 	
 	
 	

@@ -66,7 +66,7 @@ func on_arena_difficulty_increased(arena_difficulty_level: int):
 # TODO: Should decide what enemies get spawned at what timer on top of just having the enemy weights or we could use the enemy weight to actually add them in that order. 
 # TODO: Don't forget special and/or boss mobs as well.  Have to spice things up a bit!!!
 	if arena_difficulty_level >= 1:
-		print("arena difficulty greater than 3 = " + str(arena_difficulty_level))
+		#print("arena difficulty greater than 3 = " + str(arena_difficulty_level))
 		enemy_table.add_item(wizard_enemy_scene, 1)
 	var max_time_off = .5
 	#var time_off = (.1 / 12) * arena_difficulty_level

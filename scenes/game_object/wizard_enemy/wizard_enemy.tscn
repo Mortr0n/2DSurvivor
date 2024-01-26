@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d4g04172hkn6n"]
+[gd_scene load_steps=26 format=3 uid="uid://d4g04172hkn6n"]
 
 [ext_resource type="Script" path="res://scenes/game_object/wizard_enemy/wizard_enemy.gd" id="1_dwaj1"]
 [ext_resource type="PackedScene" uid="uid://ddqhnkqajlwbi" path="res://scenes/component/health_component.tscn" id="1_tp41e"]
@@ -9,6 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://d2wuia6j5jgwn" path="res://scenes/component/hurtbox_component.tscn" id="5_hpcci"]
 [ext_resource type="PackedScene" uid="uid://4saen1wuwpof" path="res://scenes/component/hit_flash_component.tscn" id="5_l00l3"]
 [ext_resource type="Shader" path="res://scenes/component/hit_flash_component.gdshader" id="6_417sd"]
+[ext_resource type="PackedScene" uid="uid://cgjb0gw8y4dv5" path="res://scenes/component/random_stream_player_2d_component.tscn" id="10_6lyeb"]
+[ext_resource type="AudioStream" uid="uid://4mwm6b3xufc5" path="res://assets/audio/footstep_carpet_000.ogg" id="11_b4d6r"]
+[ext_resource type="AudioStream" uid="uid://8qihjxtpgppu" path="res://assets/audio/footstep_carpet_001.ogg" id="12_o0v04"]
+[ext_resource type="AudioStream" uid="uid://q15jlqhw771s" path="res://assets/audio/footstep_carpet_002.ogg" id="13_3r4fh"]
+[ext_resource type="AudioStream" uid="uid://8g3xwq1wiqny" path="res://assets/audio/footstep_carpet_003.ogg" id="14_qrq1t"]
+[ext_resource type="AudioStream" uid="uid://dy6vl4e3xbcf0" path="res://assets/audio/footstep_carpet_004.ogg" id="15_cbw81"]
+[ext_resource type="AudioStream" uid="uid://b3kahpn7rbi8i" path="res://assets/audio/footstep_snow_001.ogg" id="16_m1mc6"]
+[ext_resource type="AudioStream" uid="uid://dhvtovnswvxlr" path="res://assets/audio/footstep_snow_002.ogg" id="17_g0usr"]
+[ext_resource type="AudioStream" uid="uid://diotgihidv3jp" path="res://assets/audio/footstep_snow_003.ogg" id="18_2mi3i"]
+[ext_resource type="AudioStream" uid="uid://v77d3yv6xswh" path="res://assets/audio/footstep_snow_004.ogg" id="19_d6gdp"]
 
 [sub_resource type="Animation" id="Animation_h3mh7"]
 length = 0.001
@@ -127,3 +137,7 @@ shape = SubResource("CapsuleShape2D_yu7uv")
 visible = false
 position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_oc2gj")
+
+[node name="HitRandomAudioPlayerComponent" parent="." instance=ExtResource("10_6lyeb")]
+max_distance = 300.0
+streams = Array[AudioStream]([ExtResource("11_b4d6r"), ExtResource("12_o0v04"), ExtResource("13_3r4fh"), ExtResource("14_qrq1t"), ExtResource("15_cbw81"), ExtResource("16_m1mc6"), ExtResource("17_g0usr"), ExtResource("18_2mi3i"), ExtResource("19_d6gdp")])
