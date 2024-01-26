@@ -63,12 +63,12 @@ func pick_upgrades():
 
 func on_upgrade_selected(upgrade: AbilityUpgrade):
 	apply_upgrade(upgrade)
-	print("Upgrades: "  )
-	print(current_upgrades )
+	#print("Upgrades: "  )
+	#print(current_upgrades )
 	#print("Level: " + str(current_level))
-	for i in upgrade_pool.items.size():
-		#var value = upgrade_pool[key]
-		print(upgrade_pool.items[i])
+	#for i in upgrade_pool.items.size():
+		##var value = upgrade_pool[key]
+		#print(upgrade_pool.items[i])
 
 
 func on_level_up(current_level: int):
