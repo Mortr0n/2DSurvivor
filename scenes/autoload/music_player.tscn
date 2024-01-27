@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbp51cbgol6rl"]
+
+[ext_resource type="AudioStream" uid="uid://bp2wym7ronyr3" path="res://assets/audio/music/Dragon Dance.mp3" id="1_s67wk"]
+[ext_resource type="Script" path="res://scenes/autoload/Timer.gd" id="2_ibxdg"]
+[ext_resource type="Script" path="res://scenes/autoload/music_player.gd" id="2_ymdms"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_s67wk")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
+script = ExtResource("2_ymdms")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+script = ExtResource("2_ibxdg")

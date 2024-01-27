@@ -121,5 +121,4 @@ position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_k067w")
 
 [node name="HitRandomAudioPlayerComponent" parent="." instance=ExtResource("10_nyrne")]
-max_distance = 300.0
 streams = Array[AudioStream]([ExtResource("11_q3hgf"), ExtResource("12_5nfky"), ExtResource("13_lw35d"), ExtResource("14_808vq"), ExtResource("15_mlwoi"), ExtResource("10_ifuew"), ExtResource("17_n3mdn"), ExtResource("18_7o5n5"), ExtResource("19_g6lmh")])
